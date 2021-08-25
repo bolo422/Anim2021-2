@@ -16,7 +16,12 @@ public class MouseBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(target);
+    
+        Vector3 dir = (target.transform.position - transform.position).normalized;
+        dir.y = 0;
+ 
+        Quaternion rot = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, 10 * Time.deltaTime);
 
     }
 }
